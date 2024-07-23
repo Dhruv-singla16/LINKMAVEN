@@ -54,6 +54,19 @@
 
         });
     </script>
+     <style>
+     
+      .btn {
+        
+        transition: transform 0.5s ease;
+        /* Smooth transition for the transform property */
+      }
+  
+      .btn:hover {
+        transform: scale(1.1);
+        /* Subtle scaling effect */
+      }
+      </style>
 </head>
 <body style="background-color: cornsilk;">
     <nav class="navbar navbar-expand-lg sticky-top" style="background-color: palevioletred;">
@@ -73,18 +86,18 @@
 <div class=" d-flex p-3">
 <form class="row g-3" method="post" enctype="multipart/form-data">
     <div class="col-md-6">
-      <label for="txtemaill" class="form-label" style="color: palevioletred;">Email</label>
+      <label for="txtemaill" class="form-label" style="color: palevioletred;"><b>Email</b></label>
       <input type="email" class="form-control" id="txtemaill" name="txtemaill">
       <input style="background-color: palevioletred; color: cornsilk;" type="button" value="search" id="butnsearch">
     </div>
     <div class="col-md-6">
-      <label for="txtnme" class="form-label" style="color: palevioletred;">Name</label>
+      <label for="txtnme" class="form-label" style="color: palevioletred;"><b>Name</b></label>
       <input type="text" class="form-control" id="txtnme" name="txtnme" required>
     </div>
    
    
     <div class="col-md-6">
-      <label for="txtCity" class="form-label" style="color: palevioletred;">City</label>
+      <label for="txtCity" class="form-label" style="color: palevioletred;"><b>City</b></label>
       <input type="text" class="form-control" id="txtCity" name="txtCity" required>
     </div>
     <div class="col-md-6">
@@ -124,11 +137,11 @@
       </datalist>
     </div>
     <div class="col-8">
-        <label for="txtorg" class="form-label" style="color: palevioletred;">Individual/Organisation</label>
+        <label for="txtorg" class="form-label" style="color: palevioletred;"><b>Individual/Organisation</b></label>
         <input type="text" class="form-control" id="txtorg" name="txtorg" required>
       </div>
       <div class="col-4">
-        <label for="inputmob" class="form-label" style="color: palevioletred;">Mobile</label>
+        <label for="inputmob" class="form-label" style="color: palevioletred;"><b>Mobile</b></label>
         <input type="number" class="form-control" id="inputmob" name="inputmob" required>
       </div>
       

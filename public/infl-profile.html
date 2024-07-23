@@ -59,6 +59,19 @@
          });
         })
     </script>
+    <style>
+     
+        .btn {
+          
+          transition: transform 0.5s ease;
+          /* Smooth transition for the transform property */
+        }
+    
+        .btn:hover {
+          transform: scale(1.1);
+          /* Subtle scaling effect */
+        }
+        </style>
 </head>
 
 <body style="background-color: cornsilk ;">
@@ -82,12 +95,12 @@
         <form class="row g-3" method="post" enctype="multipart/form-data">
 
             <div class="col-md-5">
-                <label for="txtemail" class="form-label">Email</label>
+                <label for="txtemail" class="form-label" style="color: palevioletred;"><b>Email</b></label>
                 <input type="email" class="form-control" id="txtemail" name="txtemail">
                 <input type="button" value="search" id="btnsearch">
             </div>
             <div class="col-md-5">
-                <label for="txtname" class="form-label">Name</label>
+                <label for="txtname" class="form-label" style="color: palevioletred;"><b>Name</b></label>
                 <input type="text" class="form-control"  id="txtname" name="txtname" required>
             </div>
             <div class="col-md-2">
@@ -98,15 +111,15 @@
                 </p>
             </div>
             <div class="col-10">
-                <label for="txtadd" class="form-label">Address</label>
+                <label for="txtadd" class="form-label" style="color: palevioletred;"><b>Address</b></label>
                 <input type="text" class="form-control" id="txtadd" name="txtadd" placeholder="1234 Main St" required>
             </div>
             <div class="col-md-4">
-                <label for="txtCity" class="form-label">City</label>
+                <label for="txtCity" class="form-label" style="color: palevioletred;"><b>City</b></label>
                 <input type="text" class="form-control" id="txtcity" name="txtcity" required>
             </div>
             <div class="col-md-4">
-                <label for="selcont" class="form-label">Content type</label>
+                <label for="selcont" class="form-label" style="color: palevioletred;"><b>Content type</b></label>
                 <select id="selcont" name="selcont"  class="form-select" multiple size="3">
                     <option selected>Select</option>
                     <option value="Fitness">Fitness</option>
@@ -122,17 +135,17 @@
                 </select>
             </div>
             <div class="col-md-4">
-                <label for="txtutube" class="form-label">Youtube Link</label>
+                <label for="txtutube" class="form-label" style="color: palevioletred;"><b>Youtube Link</b></label>
                 <input type="text" class="form-control" name="txtutube" id="txtutube" required>
             </div>
            
             <div class="col-md-4">
-                <label for="txtinsta" class="form-label">Instagram Link</label>
+                <label for="txtinsta" class="form-label" style="color: palevioletred;"><b>Instagram Link</b></label>
                 <input type="text" class="form-control" id="txtinsta" name="txtinsta" required>
             </div>
 
             <div class="col-md-4">
-                <label for="selgen" class="form-label">Gender</label>
+                <label for="selgen" class="form-label" style="color: palevioletred;"><b>Gender</b></label>
                 <select id="selgen" class="form-select" name="selgen" required>
                     <option selected>Select</option>
                     <option value="Male">Male</option>
@@ -141,7 +154,7 @@
                 </select>
             </div>
             <div class="col-md-4">
-                <label for="txtdob" class="form-label">DOB</label>
+                <label for="txtdob" class="form-label" style="color: palevioletred;"><b>DOB</b></label>
                 <input type="date" class="form-control" id="txtdob" name="txtdob" required>
             </div>
             <div>
