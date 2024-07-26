@@ -16,7 +16,7 @@
      }
     let active=localStorage.getItem("activeuser");
     // alert(active);
-    $("#dash").html("Welcome "+ active);
+    $("#dash").html("Welcome "+"- "+ active);
     $("#bookingbtn").click(function(){
       if($("#txtEmail").val()==""|| $("txtAddress").val()=="" || $("#txtdate").val()=="" || $("#txttime").val()=="" || $("#txtcity").val()=="" || $("#txtvenue").val()=="")
     {
@@ -98,7 +98,7 @@
   </nav>
 
       
-  <div style="width: inherit; height: 60px; background-color: aqua; margin-top: 20px;" ><center><h2  style="padding-top: 7px;">Influencer Dashboard</center><h2> <span style="position: absolute; right: 0px; top: 85px;" id="dash"></span></h2></h2>
+  <div style="width: inherit; height: 60px; background-color: aqua; margin-top: 20px;" ><center><h2  style="padding-top: 7px;">Influencer Dashboard</center><h2> <span style="position: absolute; right: 5px; top: 85px;" id="dash"></span></h2></h2>
   
 </div>
 
@@ -156,6 +156,13 @@
   </div>
 
   <!-- booking modal -->
+   <script>
+    $(document).ready(function(){
+      let active=localStorage.getItem("activeuser");
+    // alert(active);
+    $("#txtEmail").val(active).prop("readonly",true);
+    })
+   </script>
   <div class="modal" tabindex="-1" id="booking" style=" color: palevioletred;">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -205,6 +212,13 @@
   </div>
   
 <!-- settings modal -->
+<script>
+  $(document).ready(function(){
+    let active=localStorage.getItem("activeuser");
+  // alert(active);
+  $("#txtmail").val(active).prop("readonly",true);
+  })
+ </script>
 <div class="modal" tabindex="-1" id="settings">
   <div class="modal-dialog">
     <div class="modal-content" style="background-color: cornsilk;">

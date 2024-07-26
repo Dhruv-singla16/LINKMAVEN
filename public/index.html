@@ -104,8 +104,10 @@
             alert(err.statusText);
           })
       })
+     
     })
   </script>
+  
 
 
 </head>
@@ -278,15 +280,21 @@
   <div class="modal fade" id="signupp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content" style="background-color: cornsilk;">
+        
         <div class="modal-header" style="background-color: palevioletred; color: cornsilk">
           <h1 class="modal-title fs-5" id="exampleModalLabel"><b>Create new account</b></h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+      
         <div class="modal-body">
+          <form action="">
           <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="txtEmail" placeholder="name@example.com">
-            <label for="txtEmail" style="color: palevioletred;">Email address</label>
+            
+            <input type="email" class="form-control" id="txtEmail" placeholder="name@example.com"> 
+            <label for="txtEmail" style="color: palevioletred;">Email address</label> 
+            <input type="email">
           </div>
+        
           <div class="form-floating mb-3">
             <input type="password" class="form-control" id="pwd" placeholder="Password">
             <label for="floatingPassword" style="color: palevioletred;">Password</label>
@@ -299,6 +307,7 @@
             </select>
             <label for="combo" style="color: palevioletred;">Works with selects</label>
           </div>
+          </form>
         </div>
         <div class="modal-footer">
 
@@ -309,7 +318,7 @@
     </div>
   </div>
   <!-- login modal -->
-
+  
   <div class="modal fade" id="login" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content" style="background-color: cornsilk;">
