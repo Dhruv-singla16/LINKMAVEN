@@ -42,14 +42,14 @@
             $scope.doShowCities=function()
                 {
                     
-                    let content=$scope.selcontent;
+                    let content=$scope.selField;
                     let url="/fetch-city?content="+content;
                     $http.get(url).then(done,fail);
 
                     function done(response)
                     {
-                        $scope.jsonAryCity=response.data;
-
+                        $scope.jsonAryCities=response.data;
+                        alert(jsonAryCities);
                     }
                     function fail(err)
                     {
@@ -58,8 +58,8 @@
                 }
                 $scope.fillCards=function()
                 {
-                    let content=$scope.selcontent;
-                    let city=$scope.txtcity;
+                    let content=$scope.selField;
+                    let city=$scope.selCity;
                     let url="/fetch-influencers-cards?content="+content+"&city="+city;
                     $http.get(url).then(done,fail);
                     function done(response)

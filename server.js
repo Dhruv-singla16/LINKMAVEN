@@ -479,7 +479,7 @@ app.get("/influencer-finder",function(req,resp){
 })
 app.get("/fetch-all-fields",function(req,resp)
 {
-    mysql.query("select distinct field from iprofile",function(err,resultJsonAry){
+    mysql.query("select distinct content from iprofile",function(err,resultJsonAry){
         if(err!=null)
             {
                 resp.send(err.message);
@@ -489,7 +489,7 @@ app.get("/fetch-all-fields",function(req,resp)
     })
 
 })
-app.get("/fetch-cities",function(req,resp)
+app.get("/fetch-city",function(req,resp)
 {
     mysql.query("select * from iprofile where content=?",[req.query.content],function(err,resultJsonAry){
         if(err!=null)

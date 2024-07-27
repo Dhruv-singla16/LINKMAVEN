@@ -1,0 +1,222 @@
+<html>
+    <head>
+        <title>Inflektor</title>
+        <link rel="icon" href="pics/sitelogo.jpeg" type="image/icon type">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <script src="server.js"></script>
+        <script>
+            $(document).ready(function(){
+                let active=localStorage.getItem("activeuser");
+                $("#span").html("Welcome:"+active);
+                if(active==null)
+          {
+            location.href="index.html";
+          }
+                $("#btnLO").click(function(){
+              localStorage.removeItem("activeuser");
+              location.href="index.html"
+            })
+            })
+        </script>
+        <script>
+            var module=angular.module("myModule",[]);
+            var controller=module.controller("myController",function($scope,$http)
+        {
+            $scope.jsonAryFields;
+            $scope.jsonAryCities;
+            $scope.jsonAryCards;
+            $scope.fillFields=function()
+                {
+                    let url="/fetch-all-fields";
+                    $http.get(url).then(done,fail);
+                    function done(response)
+                    {
+                        $scope.jsonAryFields=response.data;
+                    }
+                    function fail(err)
+                    {
+                        alert(err);
+                    }
+                    
+                }
+            $scope.doShowCities=function()
+                {
+                    
+                    let field=$scope.selField;
+                    let url="/fetch-cities?field="+field;
+
+                    $http.get(url).then(done,fail);
+
+                    function done(response)
+                    {
+                        $scope.jsonAryCities=response.data;
+
+                    }
+                    function fail(err)
+                    {
+                        alert(err);
+                    }
+                }
+                $scope.fillCards=function()
+                {
+                    let field=$scope.selField;
+                    let city=$scope.selCity;
+                    let url="/fetch-influencers-cards?field="+field+"&city="+city;
+                    $http.get(url).then(done,fail);
+                    function done(response)
+                    {
+                        $scope.jsonAryCards=response.data;
+                    }
+                    function fail(err)
+                    {
+                        alert(err);
+                    }
+                    
+                }
+                $scope.fillCardsbyName=function()
+                {
+                    let iname=$scope.selName;
+                    let url="/fetch-influencers-cardsbyname?iname="+iname;
+                    $http.get(url).then(done,fail);
+                    function done(response)
+                    {
+                        $scope.jsonAryCards=response.data;
+                    }
+                    function fail(err)
+                    {
+                        alert(err);
+                    }
+                    
+                }
+                $scope.showinfo=function(index)
+                {
+                    $scope.fullDetailObj=$scope.jsonAryCards[index];
+                }
+        })
+        </script>
+        <style>
+            #outer-body{
+                width: 1100px;
+                height: 500px;
+                border: 2px solid; 
+            }
+            #inner-body{
+                width: 1000px;
+                height: 340px;
+                border: solid 2px;
+                margin-top: 150px;
+                overflow-y: scroll;
+            }
+        </style>
+    </head>
+    <body ng-app="myModule" ng-controller="myController" ng-init="fillFields();">
+        <nav class="navbar bg-body-tertiary">
+            <div class="container-fluid">
+              <div class="navbar-brand"><img src="pics/Screenshot 2024-07-18 215945.png" height="80px" width="200px" style="margin-top: -40px;"></div>
+              <div class="navbar-brand" ><span id="span" style="margin-left: 850px;"></span></div>
+              <div class="navbar-brand"><button type="button"  class="btn btn-primary" id="btnLO">Log out</button></div>
+            </div>
+          </nav><hr>
+        <center><p><h1>Find Influencers</h1><h5><span id="span"></span></h5></p></center>
+        <center>
+            <div id="outer-body">
+                <div style="width: 350px;margin-left: 50px;float: left;margin-top: 10px;">
+                    <select class="form-select" aria-label="Default select example" ng-model="selField" ng-change="doShowCities();">
+                        <option selected value=""><---Select Field---></option>
+                        <option ng-repeat="obj in jsonAryFields" value="{{obj.field}}">{{obj.field}}</option>
+                      </select>
+                </div>
+                <div style="width: 350px;margin-left: 50px;float: left;margin-top: 10px;">
+                    <select class="form-select" aria-label="Default select example" ng-model="selCity" >
+                        <option selected value=""><---Select City---></option>
+                        <option ng-repeat="obj in jsonAryCities" value="{{obj.city}}">{{obj.city}}</option>
+                      </select>
+                </div>
+                <div style="float: left;margin-top: 10px;margin-left: 20px;">
+                    <button type="button" class="btn btn-primary" ng-click="fillCards();" >Find Influencers</button>
+                </div>
+                <div class="mb-3" style="margin-top: 40px; width: 350px;margin-left: 50px;float: inline-start;float: left;">
+                    <input type="Name" placeholder="Enter Name" ng-model="selName" class="form-control" >
+                  </div>
+                  <div style="float: left;margin-top: 40px;margin-left: 20px;">
+                    <button type="button" class="btn btn-primary" ng-click="fillCardsbyName();" >Find Influencer by Name</button>
+                </div>
+
+                <div id="inner-body">
+                    <div>
+                        <div class="col-md-3" ng-repeat="obj in jsonAryCards" style="float: left;margin-left: 20px;width: 300px;">
+                            <div class="card mt-5" >
+                              <center>  <img src="uploads/{{obj.ppic}}"   height="100px" width="100px"></center>
+                                <div class="card-body">
+                                    <h5 class="card-title"><b>Name:</b> {{obj.iname}}</h5>
+                                    <h5 class="card-title"><b>Gender:</b> {{obj.gender}}</h5>
+                                    <h5 class="card-title"><b>Instagram:</b> {{obj.insta}}</h5>
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"  ng-click="showinfo($index);">More Details</button>
+                                    
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="staticBackdropLabel">Influencer's Details</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div style="height: 210px;">
+                      <div style="margin-left: 20px;float: left;">
+                        <img src="uploads/{{fullDetailObj.ppic}}" height="200px" width="200px">
+                      </div>
+                      <div style="float: left;margin-left: 20px;">
+                        <h3>{{fullDetailObj.iname}}</h3>
+                        <br><h5>{{fullDetailObj.field}}</h5><br>
+                        <h5>DOB:</h5>{{fullDetailObj.dob}} <br>
+                      </div> 
+                    </div> <hr>
+                    <div style="height: 150px;">
+                      <div style="float: inline-start;margin-left: 20px;float: left;">
+                        <b>Email ID:</b> <br> {{fullDetailObj.email}} <br>
+                        <b>City:</b> <br> {{fullDetailObj.city}} <br> 
+                        <b>State:</b> <br> {{fullDetailObj.state}} <br> 
+                      </div>
+                    </div> <hr>
+                      <div style="float: inline-start;margin-left: 20px;float: left;">
+                        <div style="float: left;">
+                        <img src="pics/insta-logo.jpeg" height="30px" width="30px">
+                        {{fullDetailObj.insta}}
+                        </div> 
+                        <div style="margin-left: 20px;float: left;">
+                        <img src="pics/snapchat-logo.jpeg" height="30px" width="30px">
+                        {{fullDetailObj.snapchat}}
+                        </div> 
+                        <div style="margin-left: 20px;float: left;">
+                       <img src="pics/youtube-logo.png" height="30px" width="30px">
+                        {{fullDetailObj.youtube}}
+                        </div> 
+                      </div>
+                      <div >
+
+                      </div>                    
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+        </center>
+        <div style="background-color: royalblue;height: 50px; width: 100%;color: white;position: absolute ;bottom: 0px;">
+          <div style="margin-left: 20px;">
+          copyright@bce
+        </div>
+        </div>
+    </body>
+</html>
