@@ -471,3 +471,58 @@ app.get("/find-client-details",function(req,resp)
     resp.send(resultJsonAry);
   })
 })
+//inflfinder
+
+app.get("/influencer-finder",function(req,resp){
+    let path=__dirname+"/public/infl-finder.html";
+    resp.sendFile(path);
+})
+app.get("/fetch-all-fields",function(req,resp)
+{
+    mysql.query("select distinct field from iprofile",function(err,resultJsonAry){
+        if(err!=null)
+            {
+                resp.send(err.message);
+                return;
+            }
+       resp.send(resultJsonAry);
+    })
+
+})
+app.get("/fetch-cities",function(req,resp)
+{
+    mysql.query("select * from iprofile where content=?",[req.query.content],function(err,resultJsonAry){
+        if(err!=null)
+            {
+                resp.send(err.message);
+                return;
+            }
+       resp.send(resultJsonAry);
+    })
+
+})
+app.get("/fetch-influencers-cards",function(req,resp)
+{
+    mysql.query("select * from iprofile where content=? and city=?",[req.query.content,req.query.city],function(err,resultJsonAry){
+        if(err!=null)
+            {
+                resp.send(err.message);
+                return;
+            }
+       resp.send(resultJsonAry);
+    })
+
+})
+app.get("/fetch-influencers-cardsbyname",function(req,resp)
+{
+    let name="%"+req.query.name+"%";
+    mysql.query("select * from iprofile where name like ?",[name],function(err,resultJsonAry){
+        if(err!=null)
+            {
+                resp.send("Not Found");
+                return;
+            }
+       resp.send(resultJsonAry);
+    })
+
+})

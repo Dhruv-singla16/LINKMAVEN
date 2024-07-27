@@ -10,15 +10,12 @@
         <script>
             $(document).ready(function(){
                 let active=localStorage.getItem("activeuser");
-                $("#span").html("Welcome:"+active);
+                $("#dash").html("Welcome:"+active);
                 if(active==null)
           {
             location.href="index.html";
           }
-                $("#btnlogout").click(function(){
-              localStorage.removeItem("activeuser");
-              location.href="index.html"
-            })
+               
             })
         </script>
         <script>
@@ -45,14 +42,13 @@
             $scope.doShowCities=function()
                 {
                     
-                    let field=$scope.selField;
-                    let url="/fetch-cities?field="+field;
-
+                    let content=$scope.selcontent;
+                    let url="/fetch-city?content="+content;
                     $http.get(url).then(done,fail);
 
                     function done(response)
                     {
-                        $scope.jsonAryCities=response.data;
+                        $scope.jsonAryCity=response.data;
 
                     }
                     function fail(err)
@@ -62,9 +58,9 @@
                 }
                 $scope.fillCards=function()
                 {
-                    let field=$scope.selField;
-                    let city=$scope.selCity;
-                    let url="/fetch-influencers-cards?field="+field+"&city="+city;
+                    let content=$scope.selcontent;
+                    let city=$scope.txtcity;
+                    let url="/fetch-influencers-cards?content="+content+"&city="+city;
                     $http.get(url).then(done,fail);
                     function done(response)
                     {
@@ -78,8 +74,8 @@
                 }
                 $scope.fillCardsbyName=function()
                 {
-                    let iname=$scope.selName;
-                    let url="/fetch-influencers-cardsbyname?iname="+iname;
+                    let name=$scope.selName;
+                    let url="/fetch-influencers-cardsbyname?name="+name;
                     $http.get(url).then(done,fail);
                     function done(response)
                     {
@@ -113,48 +109,54 @@
         </style>
     </head>
     <body style="background-color: cornsilk;" ng-app="myModule" ng-controller="myController" ng-init="fillFields();">
-        <nav class="navbar bg-body-tertiary">
-            <div class="container-fluid" style="height: 70px; background-color: palevioletred;">
-              <div class="navbar-brand"><img src="images/Screenshot 2024-07-23 002733.jpg" height="50px" width="200px"></div>
-              <div class="navbar-brand" ><span id="span" style="margin-left: 850px;"></span></div>
-              <div class="navbar-brand"><button type="button"  class="btn btn-primary" id="btnlogout">Log out</button></div>
-            </div>
-          </nav><hr>
-        <center><p><h1>Find Influencers</h1><h5><span id="span"></span></h5></p></center>
-        <center>
+      <nav class="navbar navbar-expand-lg sticky-top" style="background-color: palevioletred;">
+        <div class="container-fluid" style=" height: 40px;">
+          <a class="navbar-brand" href="#"><img src="images/Screenshot 2024-07-23 002733.jpg" alt="" height="50px" width="200px"></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+    
+          
+          </div>
+        </div>
+      </nav>
+      <div style="width: inherit; height: 60px;margin-top: 10px; " ><center><h2  >Find Influencers</center><h3> <span style="position: absolute; right: 5px; top: 72px;" id="dash"></span></h3></h2>
+  
+      </div>
+        <center> 
             <div id="outer-body">
-                <div style="width: 350px;margin-left: 50px;float: left;margin-top: 10px;">
+                <div style="width: 350px;margin-left: 50px;float: left;">
                     <select class="form-select" aria-label="Default select example" ng-model="selField" ng-change="doShowCities();">
-                        <option selected value=""><---Select Field---></option>
-                        <option ng-repeat="obj in jsonAryFields" value="{{obj.field}}">{{obj.field}}</option>
+                        <option selected value="">Select Content</option>
+                        <option ng-repeat="obj in jsonAryFields" value="{{obj.content}}">{{obj.content}}</option>
                       </select>
                 </div>
                 <div style="width: 350px;margin-left: 50px;float: left;margin-top: 10px;">
                     <select class="form-select" aria-label="Default select example" ng-model="selCity" >
-                        <option selected value=""><---Select City---></option>
+                        <option selected value="">Select City</option>
                         <option ng-repeat="obj in jsonAryCities" value="{{obj.city}}">{{obj.city}}</option>
                       </select>
                 </div>
                 <div style="float: left;margin-top: 10px;margin-left: 20px;">
-                    <button type="button" class="btn btn-primary" ng-click="fillCards();" >Find Influencers</button>
+                    <button type="button" class="btn" style="background-color: palevioletred;color: cornsilk;" ng-click="fillCards();" ><b>Find Influencers</b></button>
                 </div>
                 <div class="mb-3" style="margin-top: 40px; width: 350px;margin-left: 50px;float: inline-start;float: left;">
                     <input type="Name" placeholder="Enter Name" ng-model="selName" class="form-control" >
                   </div>
                   <div style="float: left;margin-top: 40px;margin-left: 20px;">
-                    <button type="button" class="btn btn-primary" ng-click="fillCardsbyName();" >Find Influencer by Name</button>
+                    <button type="button" class="btn" style="background-color: palevioletred;color: cornsilk;" ng-click="fillCardsbyName();" ><b>Find Influencer by Name</b></button>
                 </div>
 
                 <div id="inner-body">
                     <div>
-                        <div class="col-md-3" ng-repeat="obj in jsonAryCards" style="float: left;margin-left: 20px;width: 300px;">
+                        <div class="col-md-3" ng-repeat="obj in jsonAryCards" style="float: left;margin-left: 20px;width: 250px;">
                             <div class="card mt-5" >
                               <center>  <img src="uploads/{{obj.ppic}}"   height="100px" width="100px"></center>
                                 <div class="card-body">
-                                    <h5 class="card-title"><b>Name:</b> {{obj.iname}}</h5>
+                                    <h5 class="card-title"><b>Name:</b> {{obj.name}}</h5>
                                     <h5 class="card-title"><b>Gender:</b> {{obj.gender}}</h5>
                                     <h5 class="card-title"><b>Instagram:</b> {{obj.insta}}</h5>
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"  ng-click="showinfo($index);">More Details</button>
+                                    <button type="button" class="btn" style="background-color: palevioletred;color: cornsilk;"  data-bs-toggle="modal" data-bs-target="#staticBackdrop"  ng-click="showinfo($index);"><b>More Details</b></button>
                                     
                                 </div>
                               </div>
@@ -164,9 +166,9 @@
             </div>
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="staticBackdropLabel">Influencer's Details</h1>
+                  <div class="modal-content" style="background-color: cornsilk;">
+                    <div class="modal-header" style="background-color: palevioletred; color: cornsilk;">
+                      <h1 class="modal-title fs-5" id="staticBackdropLabel" ><b>Influencer's Details</b></h1>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -175,8 +177,8 @@
                         <img src="uploads/{{fullDetailObj.ppic}}" height="200px" width="200px">
                       </div>
                       <div style="float: left;margin-left: 20px;">
-                        <h3>{{fullDetailObj.iname}}</h3>
-                        <br><h5>{{fullDetailObj.field}}</h5><br>
+                        <h3>{{fullDetailObj.name}}</h3>
+                        <br><h5>{{fullDetailObj.content}}</h5><br>
                         <h5>DOB:</h5>{{fullDetailObj.dob}} <br>
                       </div> 
                     </div> <hr>
@@ -184,20 +186,17 @@
                       <div style="float: inline-start;margin-left: 20px;float: left;">
                         <b>Email ID:</b> <br> {{fullDetailObj.email}} <br>
                         <b>City:</b> <br> {{fullDetailObj.city}} <br> 
-                        <b>State:</b> <br> {{fullDetailObj.state}} <br> 
+                        
                       </div>
                     </div> <hr>
                       <div style="float: inline-start;margin-left: 20px;float: left;">
                         <div style="float: left;">
-                        <img src="pics/insta-logo.jpeg" height="30px" width="30px">
+                        <img src="images/insta-logo.jpeg" height="30px" width="30px">
                         {{fullDetailObj.insta}}
                         </div> 
+                        
                         <div style="margin-left: 20px;float: left;">
-                        <img src="pics/snapchat-logo.jpeg" height="30px" width="30px">
-                        {{fullDetailObj.snapchat}}
-                        </div> 
-                        <div style="margin-left: 20px;float: left;">
-                       <img src="pics/youtube-logo.png" height="30px" width="30px">
+                       <img src="images/utubee-logo.png" height="30px" width="30px">
                         {{fullDetailObj.youtube}}
                         </div> 
                       </div>
@@ -206,17 +205,14 @@
                       </div>                    
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn" style="background-color: palevioletred; color: cornsilk;" data-bs-dismiss="modal"><b>Close</b></button>
                     </div>
                   </div>
                 </div>
               </div>
 
         </center>
-        <div style="background-color: palevioletred;;height: 50px; width: 100%;color: white;position: absolute ;bottom: 0px;">
-          <div style="margin-left: 20px;">
-          <center>copyright@bce</center>
-        </div>
-        </div>
+       
+        
     </body>
 </html>

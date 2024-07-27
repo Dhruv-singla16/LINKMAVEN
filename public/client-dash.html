@@ -2,163 +2,181 @@
 <html lang="en">
 
 <head>
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 
   <title>Document</title>
   <script>
-   $(document).ready(function(){
-     if(localStorage.getItem("activeuser")==null)
-     {
-      location.href="index.html";
-      return;
-     }
-    let active=localStorage.getItem("activeuser");
-    // alert(active);
-    $("#dash").html("Welcome "+ active);
-   
-       $("#btnupdt").click(function(){
+    $(document).ready(function () {
+      if (localStorage.getItem("activeuser") == null) {
+        location.href = "index.html";
+        return;
+      }
+      let active = localStorage.getItem("activeuser");
+      // alert(active);
+      $("#dash").html("Welcome " + active);
+
+      $("#btnupdt").click(function () {
         //alert("clicked");
-        let obj={
-          type:"get",
-          url:"/pass-update",
-          data:{
-            txtmail:$("#txtmail").val(),
-            txtopass:$("#txtopass").val(),
-            txtnpass:$("#txtnpass").val()
+        let obj = {
+          type: "get",
+          url: "/pass-update",
+          data: {
+            txtmail: $("#txtmail").val(),
+            txtopass: $("#txtopass").val(),
+            txtnpass: $("#txtnpass").val()
           }
         }
-        $.ajax(obj).done(function(resp){
-        alert(resp);
+        $.ajax(obj).done(function (resp) {
+          alert(resp);
+        })
+          .fail(function (err) {
+            alert(err.statusText);
+          })
       })
-      .fail(function(err){
-        alert(err.statusText);
-      })
-       })
 
-   })
-   
+    })
+
   </script>
+  <style>
+    .btn {
+      
+      transition: transform 0.5s ease;
+      /* Smooth transition for the transform property */
+    }
+
+    .btn:hover {
+      transform: scale(1.1);
+      /* Subtle scaling effect */
+    }
+  </style>
   <script>
-    function dologout()
-    {
+    function dologout() {
       localStorage.removeItem("activeuser");
-      location.href="index.html";
-    
+      location.href = "index.html";
+
     }
   </script>
 </head>
 
-<body style="background-color: bisque;">
+<body style="background-color:cornsilk;">
   <nav class="navbar navbar-expand-lg sticky-top" style="background-color: palevioletred;">
     <div class="container-fluid" style=" height: 40px;">
-      <a class="navbar-brand" href="#"><img src="images/Screenshot 2024-07-23 002733.jpg" alt="" height="50px" width="200px"></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <a class="navbar-brand" href="#"><img src="images/Screenshot 2024-07-23 002733.jpg" alt="" height="50px"
+          width="200px"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="collapse navbar-collapse"  id="navbarNav" style="float: right;">
+      <div class="collapse navbar-collapse" id="navbarNav" style="float: right;">
         <ul class="navbar-nav">
           <button type="button" id="btnlogout" class="btn" onclick="dologout();" style="color: cornsilk;">
             <b>Logout</b>
-        </button>
-         
+          </button>
+
         </ul>
       </div>
     </div>
   </nav>
 
-      
-  <div style="width: inherit; height: 60px; background-color: aqua; margin-top: 20px;" ><center><h2  style="padding-top: 7px;">Client Dashboard</center><h2> <span style="position: absolute; right: 0px; top: 85px;" id="dash"></span></h2></h2>
+
+  <div style="width: inherit; height: 60px; margin-top: 10px;">
+   <center>
+      <h2 style="padding-top: 5px;color: palevioletred;">Client Dashboard
+    </center>
+    <h2> <span style="position: absolute;color: palevioletred; right: 5px; top: 74px;" id="dash"></span></h2>
+    </h2>
+
+  </div>
   
-</div>
 
-  <div class="d-flex flex-wrap justify-content-evenly" style="background-color: azure;">
+  <div class="d-flex flex-wrap justify-content-evenly" >
     <div class="card" style="width: 18rem;">
-      <img src="https://static.vecteezy.com/system/resources/previews/009/354/850/non_2x/male-portrait-people-profile-perfect-for-social-media-and-business-presentations-user-interface-ux-graphic-and-web-design-applications-and-interfaces-illustration-vector.jpg" width="200" height="200" class="card-img-top"
-        alt="...">
+      <img
+        src="https://static.vecteezy.com/system/resources/previews/009/354/850/non_2x/male-portrait-people-profile-perfect-for-social-media-and-business-presentations-user-interface-ux-graphic-and-web-design-applications-and-interfaces-illustration-vector.jpg"
+        width="200" height="200" class="card-img-top" alt="...">
 
       <div class="card-body">
-        
-        <center> <p>
-                    see profile here
-        </p> 
-        <a href="/profile-client" class="btn btn-primary">Profile</a></center>
-      </div>
-    </div>
-    <div class="card" style="width: 18rem;">
-      <img src="https://static.vecteezy.com/system/resources/previews/016/130/470/original/check-in-reception-icon-in-comic-style-booking-service-cartoon-illustration-on-white-isolated-background-hotel-reservation-splash-effect-business-concept-vector.jpg" width="200" height="200" class="card-img-top"
-        alt="...">
-
-      <div class="card-body">
-
 
         <center>
-          
+          <p>
+            see profile here
+          </p>
+          <a href="/profile-client" class="btn" style="background-color: palevioletred; color: cornsilk;"><b>Profile</b></a>
+        </center>
+      </div>
+    </div>
+    <div class="card" style="width: 18rem;">
+      <img
+        src="images/search.png"
+        width="200" height="200" class="card-img-top" alt="...">
+
+      <div class="card-body">
+ <center>
           <p>Find influencers here</p>
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#booking" id="bookingModalBtn" >
-            Find influencers
-        </button>
+          <a href="/influencer-finder" class="btn" style="background-color: palevioletred; color: cornsilk;"><b>Find influencers</b></a>
+          
       </div>
     </div>
 
     <div class="card" style="width: 18rem;">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-q3tBpFBVIzGR6b5CAilPBDghPVBNlSDvmg&s" width="200" height="200" class="card-img-top"
-        alt="...">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-q3tBpFBVIzGR6b5CAilPBDghPVBNlSDvmg&s"
+        width="200" height="200" class="card-img-top" alt="...">
 
-     
+
       <div class="card-body">
         <center>
           <p>change pass here</p>
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#settings">
-            Settings
-        </button>
+          <button type="button" class="btn" data-bs-toggle="modal" style="background-color: palevioletred; color: cornsilk;" data-bs-target="#settings">
+            <b>Settings</b>
+          </button>
       </div>
     </div>
   </div>
 
-<!-- settings modal -->
-<div class="modal" tabindex="-1" id="settings">
-  <div class="modal-dialog">
-    <div class="modal-content" style="background-color: cornsilk;">
-      <div class="modal-header" style="background-color: palevioletred; color: cornsilk;">
-        <h5 class="modal-title"><b>Settings</b></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form class="row g-3">
-          <div class="col-md-12">
-            <label for="txtmail" class="form-label" style="color: palevioletred;">Email</label>
-            <input type="email" class="form-control" id="txtmail">
-          </div>
-         
-          <div class="col-12">
-            <label for="txtopass" class="form-label" style="color: palevioletred;">Old password</label>
-            <input type="password" class="form-control" id="txtopass" >
-          </div>
-          <div class="col-12">
-            <label for="txtnpass" class="form-label" style="color: palevioletred;">New password</label>
-            <input type="password" class="form-control" id="txtnpass" >
-          </div>
-         
-          
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn" data-bs-dismiss="modal" style="background-color: palevioletred;color: cornsilk;"><b>Close</b></button>
-        <button type="button" class="btn" id="btnupdt" formaction="/pass-update" style="background-color: palevioletred;color: cornsilk;"><b>Update</b></button>
+  <!-- settings modal -->
+  <div class="modal" tabindex="-1" id="settings">
+    <div class="modal-dialog">
+      <div class="modal-content" style="background-color: cornsilk;">
+        <div class="modal-header" style="background-color: palevioletred; color: cornsilk;">
+          <h5 class="modal-title"><b>Settings</b></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form class="row g-3">
+            <div class="col-md-12">
+              <label for="txtmail" class="form-label" style="color: palevioletred;">Email</label>
+              <input type="email" class="form-control" id="txtmail">
+            </div>
+
+            <div class="col-12">
+              <label for="txtopass" class="form-label" style="color: palevioletred;">Old password</label>
+              <input type="password" class="form-control" id="txtopass">
+            </div>
+            <div class="col-12">
+              <label for="txtnpass" class="form-label" style="color: palevioletred;">New password</label>
+              <input type="password" class="form-control" id="txtnpass">
+            </div>
+
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn" data-bs-dismiss="modal"
+            style="background-color: palevioletred;color: cornsilk;"><b>Close</b></button>
+          <button type="button" class="btn" id="btnupdt" formaction="/pass-update"
+            style="background-color: palevioletred;color: cornsilk;"><b>Update</b></button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
-
-
-
-
