@@ -22,7 +22,7 @@
             var module=angular.module("myModule",[]);
             var controller=module.controller("myController",function($scope,$http)
         {
-            $scope.jsonAryFields;
+            $scope.jsonArycontents;
             $scope.jsonAryCities;
             $scope.jsonAryCards;
             $scope.fillFields=function()
@@ -31,25 +31,25 @@
                     $http.get(url).then(done,fail);
                     function done(response)
                     {
-                        $scope.jsonAryFields=response.data;
+                        $scope.jsonArycontents=response.data;
                     }
                     function fail(err)
                     {
                         alert(err);
                     }
-                    
+                    alert(response.data);
                 }
+                
             $scope.doShowCities=function()
                 {
                     
-                    let content=$scope.selField;
+                    let content=$scope.selectcontent;
                     let url="/fetch-city?content="+content;
                     $http.get(url).then(done,fail);
 
                     function done(response)
                     {
                         $scope.jsonAryCities=response.data;
-                        alert(jsonAryCities);
                     }
                     function fail(err)
                     {
@@ -58,7 +58,7 @@
                 }
                 $scope.fillCards=function()
                 {
-                    let content=$scope.selField;
+                    let content=$scope.selectcontent;
                     let city=$scope.selCity;
                     let url="/fetch-influencers-cards?content="+content+"&city="+city;
                     $http.get(url).then(done,fail);
@@ -74,7 +74,7 @@
                 }
                 $scope.fillCardsbyName=function()
                 {
-                    let name=$scope.selName;
+                    let name=$scope.fillName;
                     let url="/fetch-influencers-cardsbyname?name="+name;
                     $http.get(url).then(done,fail);
                     function done(response)
@@ -126,9 +126,9 @@
         <center> 
             <div id="outer-body">
                 <div style="width: 350px;margin-left: 50px;float: left;">
-                    <select class="form-select" aria-label="Default select example" ng-model="selField" ng-change="doShowCities();">
+                    <select class="form-select" aria-label="Default select example" ng-model="selectcontent" ng-change="doShowCities();">
                         <option selected value="">Select Content</option>
-                        <option ng-repeat="obj in jsonAryFields" value="{{obj.content}}">{{obj.content}}</option>
+                        <option ng-repeat="obj in jsonArycontents" value="{{obj.content}}">{{obj.content}}</option>
                       </select>
                 </div>
                 <div style="width: 350px;margin-left: 50px;float: left;margin-top: 10px;">
@@ -141,7 +141,7 @@
                     <button type="button" class="btn" style="background-color: palevioletred;color: cornsilk;" ng-click="fillCards();" ><b>Find Influencers</b></button>
                 </div>
                 <div class="mb-3" style="margin-top: 40px; width: 350px;margin-left: 50px;float: inline-start;float: left;">
-                    <input type="Name" placeholder="Enter Name" ng-model="selName" class="form-control" >
+                    <input type="Name" placeholder="Enter Name" ng-model="fillName" class="form-control" >
                   </div>
                   <div style="float: left;margin-top: 40px;margin-left: 20px;">
                     <button type="button" class="btn" style="background-color: palevioletred;color: cornsilk;" ng-click="fillCardsbyName();" ><b>Find Influencer by Name</b></button>
@@ -180,6 +180,8 @@
                         <h3>{{fullDetailObj.name}}</h3>
                         <br><h5>{{fullDetailObj.content}}</h5><br>
                         <h5>DOB:</h5>{{fullDetailObj.dob}} <br>
+
+
                       </div> 
                     </div> <hr>
                     <div style="height: 150px;">

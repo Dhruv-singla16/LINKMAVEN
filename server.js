@@ -485,7 +485,9 @@ app.get("/fetch-all-fields",function(req,resp)
                 resp.send(err.message);
                 return;
             }
+            console.log(resultJsonAry);
        resp.send(resultJsonAry);
+
     })
 
 })
@@ -498,6 +500,7 @@ app.get("/fetch-city",function(req,resp)
                 return;
             }
        resp.send(resultJsonAry);
+       console.log(resultJsonAry);
     })
 
 })
@@ -524,5 +527,5 @@ app.get("/fetch-influencers-cardsbyname",function(req,resp)
             }
        resp.send(resultJsonAry);
     })
-
 })
+
