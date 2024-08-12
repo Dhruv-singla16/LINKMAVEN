@@ -107,6 +107,20 @@
      
     })
   </script>
+  <script>
+    $(document).ready(function () {
+      $("#txtEmail").blur(function(){
+              
+              var pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/; 
+              let email=$(this).val();
+
+              if(pattern.test(email)==true)
+                  alert("Valid");
+              else
+                  alert("fill email like xyz@gmail.com");
+          });
+    });
+  </script>
   
 
 
